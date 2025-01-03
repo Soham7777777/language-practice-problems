@@ -69,7 +69,7 @@
             n = Math.floor(n / 2);
         }
         document.querySelector("#program2 pre").innerHTML = output.trim().split('').reverse().join('');
-    })
+    });
 
     document.querySelector("#program3 form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -123,7 +123,7 @@
         }
 
         document.querySelector("#program3 pre").innerHTML = output;
-    })
+    });
 
     document.querySelector("#program4 form").addEventListener("submit", function(event){
         event.preventDefault();
@@ -142,6 +142,38 @@
             x += i % 2 === 0 ? n : 0;
         }
         document.querySelector("#program4 pre:last-child").innerHTML = output;
-    })
+    });
+
+    document.querySelector("#program5 form").addEventListener("submit", function(event){
+        event.preventDefault();
+        let n = parseInt(document.querySelector("#program5 input").value.trim()), output = "";
+
+        function fact(n) {
+            if(n === 0)
+                return 1;
+            let out = 1;
+            for(let i=2;i<=n;i++){
+                out *= i;
+            }
+            return out;
+        }
+
+        // nCi = n! / (i! * (n-i)!)   – ith element of nth row, here n and i starts with 0
+
+        for(let i = 1; i <= n; i++) { 
+            let col = 0;
+            for(let j = 1; j <= n; j++) {
+                if(j <= n-i) {
+                    output += " " + " ";
+                } else {
+                    output += Math.floor((fact(i-1))/(fact(col) * fact(i-1-col))) + "   ";
+                    col++;
+                }
+            }
+            output += "\n";
+        }
+
+        document.querySelector("#program5 pre").innerHTML = output;
+    });
 
 }());
